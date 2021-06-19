@@ -4,6 +4,8 @@ import "./styles.css";
 import { Home } from "./Home";
 import { About } from "./About";
 import { Contract } from "./Contract";
+import { ContractDetailA } from "./ContractDetailA";
+import { ContractDetailB } from "./ContractDetailB";
 
 export default function App() {
   return (
@@ -22,9 +24,22 @@ export default function App() {
         <Route exact path="/about">
           <About />
         </Route>
-        <Route exact path="/contract">
-          <Contract />
-        </Route>
+        <Route
+          path="/contract"
+          render={({ match: { url } }) => (
+            <Switch>
+              <Route exact path="/contract">
+                <Contract />
+              </Route>
+              <Route path={`${url}/datailA`}>
+                <ContractDetailA />
+              </Route>
+              <Route path={`${url}/datailB`}>
+                <ContractDetailB />
+              </Route>
+            </Switch>
+          )}
+        />
       </Switch>
     </BrowserRouter>
   );
